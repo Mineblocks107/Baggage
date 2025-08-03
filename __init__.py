@@ -1,5 +1,5 @@
 import webview
-from htmlStuff import *
+from Bhtml import *
 
 def initWebpage():
     html = HTMLInit()
