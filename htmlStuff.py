@@ -1,5 +1,4 @@
 import uuid
-import webview
 
 class HTMLAttribute:
     def __init__(self, attributeName, attributeValue = None):
@@ -54,15 +53,3 @@ class HTMLInputText(HTMLElement):
     def __init__(self):
         super().__init__("input")
         self.addAttribute(HTMLAttribute("type", "text"))
-
-
-def initWebpage(titleName: str):
-    html = HTMLInit()
-    return html
-
-root = initWebpage("Html")
-root.addChildElement(HTMLInputText())
-
-open("test.html", "w").write(str(root))
-webview.create_window('', 'test.html')
-webview.start()
