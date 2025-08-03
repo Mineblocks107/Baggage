@@ -26,13 +26,13 @@ class HTMLElement:
             reprString += f' {attributes}'
         reprString += '>'
         for k, v in self.child.items():
-            reprString += v.__repr__()
+            reprString += str(v)
         reprString += f'</{self.name}>'
         return reprString
 
     def getAttributes(self):
         attrStr = ''
-        for k, v in self.attributes:
+        for k, v in self.attributes.items():
             attrStr += ''.join(k)
             if v:
                 attrStr += ''.join(['="', v, '"'])
@@ -50,23 +50,19 @@ class HTMLInit(HTMLElement):
     def __init__(self):
         super().__init__("html")
 
+class HTMLInputText(HTMLElement):
+    def __init__(self):
+        super().__init__("input")
+        self.addAttribute(HTMLAttribute("type", "text"))
+
+
 def initWebpage(titleName: str):
     html = HTMLInit()
-    head = HTMLElement("head") 
-    title = HTMLElement("title")
-    titleText = HTMLPlainText(titleName)
-    title.addChildElement(titleText)
-    head.addChildElement(title)
-    html.addChildElement(head)
-    body = HTMLElement("body")
-    h1 = HTMLElement("h1")
-    h1Text = HTMLPlainText("Hello!")
-    h1.addChildElement(h1Text)
-    body.addChildElement(h1)
-    html.addChildElement(body)
-    
-    return html.__repr__()
+    return html
 
-open("test.html", "w").write(initWebpage("Hello!"))
+root = initWebpage("Html")
+root.addChildElement(HTMLInputText())
+
+open("test.html", "w").write(str(root))
 webview.create_window('', 'test.html')
 webview.start()
