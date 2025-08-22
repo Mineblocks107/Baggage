@@ -10,3 +10,18 @@ class CSSSelector:
 
     def addDeclaration(self, declaration: CSSDeclaration):
         self.declaration[declaration.property] = declaration.value
+    
+    def __repr__(self):
+        finalRetStr = ""
+        finalRetStr += self.selector
+        finalRetStr += "{\n"
+        for k, v in self.declaration.items():
+            finalRetStr += f"{k}: {v}; \n"
+        finalRetStr += "}"
+        return finalRetStr
+    
+
+f = CSSSelector("test")
+f.addDeclaration(CSSDeclaration("test1", "test2"))
+
+print(f)
