@@ -1,4 +1,4 @@
-import uuid
+import uuid, webview
 
 class HTMLAttribute:
     def __init__(self, attributeName, attributeValue = None):
@@ -48,6 +48,11 @@ class HTMLPlainText:
 class HTMLInit(HTMLElement):
     def __init__(self):
         super().__init__("html")
+
+    def mainLoop(self):
+        open("test.html", "w").write(repr(self))
+        webview.create_window('', "test.html")
+        webview.start()
 
 class HTMLInputText(HTMLElement):
     def __init__(self):
